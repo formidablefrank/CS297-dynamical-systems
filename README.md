@@ -2,24 +2,22 @@
 
 ## Overview
 
-I completed an advanced graduate course in dynamical systems, where I explored mathematical modeling of complex system behavior through analysis and numerical simulation. This repository contains my work applying dynamical systems concepts to real-world problems, including bifurcation analysis, phase portrait construction, stability analysis of equilibrium points, and investigation of periodic orbits and limit cycles.
+I completed an advanced graduate course in dynamical systems, where I explored mathematical modeling of complex system behavior through analysis and numerical simulation. This repository contains my work on bifurcation analysis, phase portrait construction, stability analysis of equilibrium points, and investigation of periodic orbits and limit cycles on real-world problems.
 
-## Skills and Learning Objectives
+## Learning Objectives
 
-- Analyzing system behavior near fixed points and determining stability through linearization and eigenvalue analysis
+- Analyzing stability near fixed points and through linearization and eigenvalue analysis
 - Constructing phase portraits to visualize long-term behavior and separatrix structures in 2D systems
 - Identifying bifurcations—critical parameter values where system dynamics fundamentally change
 - Studying limit cycles and periodic oscillations in nonlinear systems
-- Applying perturbation methods for analyzing near-integrable systems
-- Using computational tools to validate analytical findings and explore regimes beyond analytical tractability
-- Documenting mathematical analysis with rigorous derivations and computational verification
+- Using computational tools to validate analytical findings
 
 ## Problem Sets
 
 Each problem set contains detailed mathematical derivations, computational implementations, and visual analysis of system dynamics.
 
 - **Problem Set 1**: Foundations in phase plane analysis, fixed point classification, and bifurcation phenomena. Includes 2D nonlinear system analysis with visualization of trajectories and stability regions.
-- **Problem Set 2**: Advanced topics including higher-dimensional systems, perturbation analysis, and complex dynamical behavior. Demonstrates limit cycle detection and bifurcation parameter sweeps.
+- **Problem Set 2**: Advanced topics including higher-dimensional systems, perturbation analysis, and complex dynamical behavior. Demonstrates limit cycle detection and bifurcations.
 - **Problem Set 3**: Synthesis of course concepts with emphasis on analysis techniques for practical systems and rigorous mathematical documentation.
 
 The computational analysis across problem sets reveals:
@@ -53,8 +51,6 @@ To explore the work:
 4. Study Maple worksheets for symbolic approaches to solving differential equations and analyzing stability
 
 ## References
-
-The course material draws on standard references in dynamical systems theory:
 
 - Strogatz, S. H. Nonlinear Dynamics and Chaos
 - Guckenheimer, J., & Holmes, P. Nonlinear Oscillations, Dynamical Systems, and Bifurcations of Vector Fields
