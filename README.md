@@ -1,12 +1,10 @@
-# Dynamical Systems
+# CS297 Dynamical Systems
 
 ## Overview
 
-I completed an advanced graduate course in dynamical systems theory and computation, where I explored mathematical modeling of complex system behavior through analysis and numerical simulation. This repository contains my work applying dynamical systems concepts to real-world problems, including bifurcation analysis, phase portrait construction, stability analysis of equilibrium points, and investigation of periodic orbits and limit cycles.
+I completed an advanced graduate course in dynamical systems, where I explored mathematical modeling of complex system behavior through analysis and numerical simulation. This repository contains my work applying dynamical systems concepts to real-world problems, including bifurcation analysis, phase portrait construction, stability analysis of equilibrium points, and investigation of periodic orbits and limit cycles.
 
 ## Skills and Learning Objectives
-
-Through this course, I developed proficiency in:
 
 - Analyzing system behavior near fixed points and determining stability through linearization and eigenvalue analysis
 - Constructing phase portraits to visualize long-term behavior and separatrix structures in 2D systems
@@ -18,15 +16,18 @@ Through this course, I developed proficiency in:
 
 ## Problem Sets
 
-The repository contains three comprehensive problem sets:
+Each problem set contains detailed mathematical derivations, computational implementations, and visual analysis of system dynamics.
 
 - **Problem Set 1**: Foundations in phase plane analysis, fixed point classification, and bifurcation phenomena. Includes 2D nonlinear system analysis with visualization of trajectories and stability regions.
-
 - **Problem Set 2**: Advanced topics including higher-dimensional systems, perturbation analysis, and complex dynamical behavior. Demonstrates limit cycle detection and bifurcation parameter sweeps.
-
 - **Problem Set 3**: Synthesis of course concepts with emphasis on analysis techniques for practical systems and rigorous mathematical documentation.
 
-Each problem set contains detailed mathematical derivations, computational implementations, and visual analysis of system dynamics.
+The computational analysis across problem sets reveals:
+
+- Clear connections between analytical predictions from fixed point analysis and numerical phase portraits
+- Parameter regions where qualitative system behavior transitions through bifurcations
+- Validation of theoretical results through multiple computational approaches
+- Complex nonlinear phenomena including limit cycles, heteroclinic connections, and strange attractors in parameter-dependent systems
 
 ## Software Stack
 
@@ -50,15 +51,6 @@ To explore the work:
 2. Review rendered plots and images in problem set directories to understand phase portraits and bifurcation diagrams
 3. Examine LaTeX source files and compiled PDFs for complete mathematical exposition
 4. Study Maple worksheets for symbolic approaches to solving differential equations and analyzing stability
-
-## Key Results and Findings
-
-The computational analysis across problem sets reveals:
-
-- Clear connections between analytical predictions from fixed point analysis and numerical phase portraits
-- Parameter regions where qualitative system behavior transitions through bifurcations
-- Validation of theoretical results through multiple computational approaches
-- Complex nonlinear phenomena including limit cycles, heteroclinic connections, and strange attractors in parameter-dependent systems
 
 ## References
 
