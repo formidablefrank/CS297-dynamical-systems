@@ -1,0 +1,889 @@
+\documentclass[12pt]{article}
+\usepackage{booktabs}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol, graphicx}
+\graphicspath{ {Images/} }
+\pagestyle{empty}
+\usepackage{amsfonts,amsmath}
+\usepackage{tikz}
+\newcommand{\mycbox}[1]{\tikz{\path[draw=#1,fill=#1] (0,0) rectangle (.2cm,.2cm);}}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newtheorem{theorem}{THEOREM}
+\newtheorem{proof}{PROOF}
+
+
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\addtolength{\oddsidemargin}{-.875in}
+\addtolength{\evensidemargin}{-.875in}
+\addtolength{\textwidth}{1.75in}
+\addtolength{\topmargin}{-.875in}
+\addtolength{\textheight}{1.75in}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\def\Rl{\mathbb{R}}
+
+
+\begin{document}
+	
+	\centerline{{\sc Problem Set No. 3(Last Problem Set)}}
+	\bigskip
+	\centerline{CS 297 - Dynamical System}
+	\centerline{by: Bel, Joshua and Racquel}
+	
+	%\begin{theorem}
+	%Trial theorem package
+	%\end{theorem}
+	\bigskip\noindent
+	{\bf EXERCISES FOR CHAPTER 7 }\\
+	{\bf 7.1.8 A Circular Limit Cycle} \\
+	Consider $\ddot{x} + a\dot{x}(x^2+\dot{x}^2-1)+x = 0$, where $a > 0$.
+	\\{\bf Solution: }\\
+	\indent
+	{\bf a. }\\ 
+	
+	Let $\begin{cases} \dot{x}=y \\ \dot{y}=-ay(x^2 + y^2 -1) -x \end{cases}$ . \\
+	
+	To let $\dot{x}=0$, we get $y = 0$. Substituting this in the second equation, we get $(\dot{x},\dot{y} = (0,0)$ when $(x,y) = (0,0)$. Thus the origin is a fixed point.Taking the Jacobian, \\
+	\begin{align*}
+	J&=\begin{bmatrix}
+	0 & 1\\
+	-2axy & -1
+	\end{bmatrix}\\
+	&= \begin{bmatrix}
+	0 & 1\\
+	-1 & a
+	\end{bmatrix},\text{at the origin}\\
+	(-\lambda)(a-\lambda) + 1 &= 0\\
+	\lambda^2 -a\lambda + 1 &=0\\
+	\lambda &= \frac{a \pm \sqrt[]{a^2-4}}{2}
+	\end{align*}
+	Note that $a > 0$. Then if $0 < a < 2$, the roots are complex conjugates, the fixed point is an unstable spiral. If $a > 2$, the roots are positive, then the fixed point is an unstable node.\\
+	
+	{\bf b. }Expressing the equations in polar coordinates:\\
+	\begin{align*}
+	r\dot{r} &= x\dot{x} + y\dot{y}\\
+	&=xy + y(-ay(x^2 + y^2 -1) - x)\\
+	&=-ay^2(x^2 + y^2 -1)\\
+	&=-ar^2sin^2\theta (r^2 - 1)\\
+	\dot{r} &= -arsin^2\theta(r^2 - 1)
+	\end{align*}
+	Also,
+	\begin{align*}
+	\dot{\theta} &= \frac{x\dot{y} - y\dot{x}}{r^2}\\
+	&= \frac{x(-ay(x^2 + y^2 -1) -x) - y^2}{r^2}\\
+	&= \frac{-(x^2+y^2) -axy(x^2 + y^2 -1)}{r^2}\\
+	&= \frac{-r^2 -ar^2sin\theta cos\theta (r^2-1)}{r^2}\\
+	&= -1 -asin\theta cos\theta (r^2 - 1)
+	\end{align*}
+	At $\dot{r}=0$ , since $r \geq 0$, either $r=0$ or $r=1$. At $r=1$, $\dot{\theta} = -1$.
+	Then there exists a circular limit cycle with amplitude 1 and period $2\pi$.\\
+	
+	{\bf c. }Since $f(r,\theta) = -arsin^2\theta(r^2 -1 )$,\\
+	\begin{align*}
+	\frac{\partial f}{\partial r} &= -asin^2\theta(3r^2-1)\\
+	&=-2asin^2\theta, \text{at r=1}\\
+	&\leq 0, \text{stable.}
+	\end{align*}
+	
+	{\bf d. }From part b, it was seen that if $\dot{r}=0$, either $r=0$ or $r=1$. Then the only other choice for a limit cycle is when $r=0$. If r, the amplitude, is zero, this reduces to a point, and there is no limit cycle to speak of. Thus the cycle $r=1$, $\dot{\theta} = -1$ is unique.\\
+	
+	{\bf 7.2.10 Liapunov Function} \\
+	The Liapunov function $V$ must be positive-definite and the total derivative be negative. Given $V = ax^2 + by^2$ the Hessian matrix of $V$ is given by
+	\begin{equation*}
+	H(V)=
+	\begin{bmatrix}
+	2a & 0\\
+	0 & 2b
+	\end{bmatrix}
+	\end{equation*}
+	$H(V)$ can only be positive definite if $a>0$ and $b>0$. The total derivative of $V$ is given by
+	\begin{align*}
+	\dot{V} &= 2ax\dot{x} + 2by\dot{y}\\
+	&= 2ax(y-x^3) + 2by(-x-y^3)\\
+	&= -2ax^4 + (2a-2b)xy - 2by^4
+	\end{align*}
+	To cancel the $xy$ term we set $a=b$ and $\dot{V}$ will now be negative.
+	Since $V$ is a valid Liapunov function for the system, closed orbits cannot exist.
+	\\
+	{\bf 7.2.13 Dulac and Competition Model}\\
+	{\bf Solution:} \\
+	Let 
+	\begin{align*}
+	g &=\frac{1}{N_1 N_2},~~~ N=(N_1, N_2)~\text{such that}~\\ \dot{N_1} &=r_1 N_1(1-\frac{N_1}{K_1})-b_1N_1N_2,\\
+	\dot{N_2} &=r_2 N_2(1-\frac{N_2}{K_2})-b_2N_1N_2\\
+	\nabla \cdot \left(g \dot{N}\right)&=\frac{\partial}{\partial N_1}\left(g \cdot \dot{N_1}\right)+\frac{\partial}{\partial N_2}\left(g \cdot \dot{N_2}\right)\\
+	&=\frac{\partial}{\partial N_1}\left(\frac{r_1}{N_2}\left(1-\frac{N_1}{K_1}-b_1\right)\right)+\frac{\partial}{\partial N_2}\left(\frac{r_2}{N_1}\left(1-\frac{N_2}{K_2}-b_2\right)\right)\\
+	&=-\frac{r_1}{K_1 N_2}-\frac{r_2}{K_2 N_1}\\
+	\end{align*}
+	Since $r_1,r_2, K_1,K_2$ are all positive parameters, $N_1, N_2 >0.$\\
+	$\therefore \nabla \cdot \left(g \dot{N} \right)<0.$\\
+	Now, by Dulac's criterion implies that there are no closed orbits in the first quadrant. \mycbox{black}\\
+	\bigskip\noindent
+	{\bf 7.3.4 Poincare-Bendixson}\\
+	Consider the system
+	$\begin{cases}
+	\dot{x} = x(1-4x^2 - y^2) - \frac{1}{2}y(1+x)\\
+	\dot{y} = y(1-4x^2 -y^2) +2x(1+x)
+	\end{cases}$.\\
+	{\bf Solution:}\\
+	\indent
+	{\bf a. } The Jacobian,
+	\begin{align*}
+	J&=\begin{bmatrix}
+	1-12x^2-y-\frac{1}{2}y & -2xy - \frac{1}{2} -\frac{1}{2}x\\
+	-8xy +2 + 4x& -1 - 4x^2 - 3y^2
+	\end{bmatrix}. \\
+	&=\begin{bmatrix}
+	1 & - \frac{1}{2}\\
+	2 & -1 
+	\end{bmatrix}, \text{at the origin}
+	\end{align*}
+	Taking the eigenvalues, 
+	\begin{align*}
+	(1-\lambda)^2 + 1 &=0\\
+	\lambda^2 -2\lambda + 2 &=0\\
+	\lambda &= \frac{2 \pm \sqrt{4-8}}{2}\\
+	&= 1\pm i
+	\end{align*}.
+	Since the eigenvalues are complex conjugates, the origin is an unstable spiral.\\
+	\indent
+	{\bf b. } Let $V = (1-4x^2 -y^2)^2$. Then
+	\begin{align*}
+	\dot{V} &= 2(1-4x^2-y^2)(-8x\dot{x}-2y\dot{y})\\
+	&=2(1-4x^2-y^2)(-8x(x(1-4x^2 - y^2) - \frac{1}{2}y(1+x))-2y(y(1-4x^2 -y^2) +2x(1+x)))\\
+	&=2\sqrt{V}(-8x^2\sqrt{V}+4xy(1+x) -2y^2\sqrt{V} - 4xy(1+x))\\
+	&=-4\sqrt{V}(4x^2\sqrt{V}+y^2\sqrt{V})\\
+	&=-4V(4x^2 + y^2)\\
+	& \leq 0, \text{since } V,x^2, y^2 \geq 0
+	\end{align*}
+	Since $V\geq 0$ and is decreasing, then $\lim_{t \to \infty} V = 0$.
+	\\Thus, all trajectories approach the ellipse $4x^2 + y^2 = 1$ as $t\to\infty$.\\
+	\bigskip\noindent
+	\\
+	{\bf 7.4.2 Lienard System}\\
+	{\bf Solution:} \\
+	Consider $\ddot{x} + \mu(x^4-1)\dot{x} + x = 0$. To prove it has unique stable limit cycle we must contruct a trapping region such that all trajectories are coming in but the fixed point inside is unstable. Convert the equation to system of first-order differential equations:
+	\begin{align*}
+	\dot{x} &= y\\
+	\dot{y} &= -\mu(x^4-1)y - x = -\mu x^4 + \mu y - x
+	\end{align*}
+	The fixed points are given by $(x^\star, y*\star)=(0,0)$. In linearizing the system, Jacobian matrix at the fixed point is given as
+	\begin{equation*}
+	J = 
+	\begin{bmatrix}
+	0 & 1\\
+	-4\mu x^3 - 1 & -\mu(x^4-1)
+	\end{bmatrix} =
+	\begin{bmatrix}
+	0 & 1\\
+	-1 & \mu
+	\end{bmatrix}
+	\end{equation*}
+	We can see that $\Delta = 1 > 0$ and $\tau=\mu > 0$ and this is unstable. To easily construct the trapping region, we plot the nullclines for $\mu=1$.
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=0.4\textwidth]{742.png}
+		\caption{}
+	\end{figure}
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=.4\textwidth]{742b}
+	\end{figure}
+	Blue and yellow lines are the nullclines and trapping region is determined by union of red and violet regions punctured by the green region. As we can see this is a valid trapping region and by Poincare-Bendixson theorem, there is a unique stable limit cycle. If $\mu < 0$, the system does not have a limit cycle anymore and the fixed point is now stable.\\
+	\noindent
+	{\bf 7.5.6 Biased Van der Pol} \\
+	{\bf Solution:}\\
+	\indent
+	{\bf a. } To classify all the fixed points, we first write out our system in Lienard form. First we define $F(x)$ so that
+	\begin{align*}
+	\ddot{x}+\mu(x^2-1)\dot{x}=\frac{d}{dx}\left(\dot{x}+\mu F(x)\right),
+	\end{align*}
+	which works out if $F(x)=\frac{x^3}{3}-x,$  just as it did in the non-biased case. Now, we find that $\dot{y}=-\frac{(x-a)}{\mu}.$ Thus, our system becomes
+	\begin{align*}
+	\dot{x} &=\mu[y-F(x)]\\
+	\dot{y} &=-\frac{x-a}{\mu}
+	\end{align*}
+	Thus, our $x-$ nullcline becomes $y=F(x)$ and our $y-$ nullcline becomes $x=a.$ The intersection and the only fixed point is at $x^*=\left(a,F(a)\right)=\left(a,a^3/3-a\right).$ Next, we compute the Jacobian matrix and evaluate at $X^*.$
+	
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=4cm]{7_5_6_a}
+		\caption{}
+	\end{figure}
+	
+	Now,\\
+	\begin{align*}
+	J&=\left(\begin{array}{cc} -\mu (x^2-1) & \mu \\
+	-\frac{1}{\mu} & 0
+	\end{array}\right).
+	\end{align*}
+	From this we find that our trace and determinant are going to be given by $T=\mu(a^2-1)$ and $D=1.$  Furthermore, we have that the system is unstable when $-1< a <1$ and unstable otherwise. Moreover, for sufficiently high values of $a$ the value of $T^2-4D=\mu^2(a^2-1)^2-4$ will be positive, implying that the fixed point will be a node. Clearly, this can't always be the case, since plugging in $a=1$ readily checks out as giving us negative value for $T^2-4D,$ implying that we do have spiral behaviour for certain values of $a.$\\
+	\indent
+	{\bf b. } See figure below for a numerically produced plot given that $a=0.4$ and $\mu=5,$ which has been laid on top of a vector field of that system. Now, to see that the fixed point in cases like these are unstable, we resort to the work we did for part $(a)$ with respect to finding stabilities of fixed points for various regions.\\
+	\indent
+	{\bf c. } In this case, for $|a|<a_c=1,$ the $y-$ nullcline intersects the $x-$ nullcline on the middle branch of the cubic nullcline. We know that when this is the case the intersection, the fixed point, is unstable, so all initial conditions move away from that point. Furthermore, they all move toward the cubic nullcline, and once there, they will move up along the nullcline if it has reached the negative leg, and will move down if on the positive leg. Eventually, the trajectory will reach either a local maximum or local minimum depending on which leg you are on.
+	
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=4cm]{7_5_6_c}
+		\caption{}
+	\end{figure}
+	
+	Now, if $|a|>a_c,$ there can be no stable limit cycle, since the $x$ nullcline intersects the cubic nullcline along one of the positive branches, and consequently, once a trajectory hits that nullcline, it will move slowly along it and toward the intersection since if it hits below the intersection, then $x<a$ so $\dot{x}$ is positive and similarly negative if $x>a.$ Thus, since all trajectories end up moving slowly along nullclines and toward the fixed point, there can be no stable limit cycles.\\
+	\indent
+	{\bf d. } Graph:\\
+	
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=4cm]{7_5_6_d}
+		\caption{}
+	\end{figure}
+	
+	If if $a=1.1$, all of the trajectories end up getting stuck near the local minimum of the cubic nullcline. Now, if a slight disturbance moves the state of the system to just below the fixed point then it will shoot across to the negative leg of the cubic, and then go along the whole of the cycle but get stuck again at the globally attracting rest state.\\
+	
+	\noindent
+	{\bf 7.6.14 Computer Test of Two-Timing}\\
+	\textbf{a.} In deriving the averaged equations for $\ddot{x} + \epsilon (\dot{x})^3 + x = 0, x(0)=a, \dot{x}(0)=0$ we have
+	\begin{align*}
+	h &= \dot{x}^3 = (-r\sin(\theta))^3\\
+	r' &= \langle h \sin(\theta) \rangle = \langle -r^3 \sin^4(\theta) = -\frac{3}{8}r^3\\
+	r\phi' &= \langle h \cos(\theta) \rangle = \langle -r^3 \sin^3(\theta) \cos(\theta) \rangle = 0
+	\end{align*}
+	\textbf{b.} Initial conditions imply $r(0) \approx \sqrt[]{(x(0))^2 + (\dot{x}(0))^2} = a$ and $\phi(0) \approx \arctan\frac{\dot{x}(0)}{x(0)} - \tau = 0$. Since $\phi' = 0$ then $\phi(T) = 0$. To find $r(T)$, we solve $r' = -\frac{3}{8}r^3$ subject to $r(0)=a$.
+	\begin{align*}
+	\frac{dr}{dT} &= -\frac{3}{8}r^3\\
+	-\frac{8}{3} \int\frac{dr}{r^3} &= \int dT\\
+	\frac{-8}{3} \cdot \frac{-1}{2r^2} &= T + \frac{4}{3a^2}\\
+	r(T) &= \sqrt[]{\frac{4}{3}\left(\epsilon t + \frac{4}{3a^2}\right)^{-1}}
+	\end{align*}
+	Hence we have
+	\begin{equation*}
+	x(t,\epsilon) = \sqrt[]{\frac{4}{3}\left(\epsilon t + \frac{4}{3a^2}\right)^{-1}}\cos(t) + O(\epsilon)
+	\end{equation*}
+	\textbf{c.} In the graph below the numerical solution is shown in blue and the averaged solution is shown in yellow.
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=.4\textwidth]{7614}
+	\end{figure}
+	\\
+	\noindent
+	{\bf 8.1.10 Budworms in Forest}\\
+	{\bf Solution:}\\
+	\indent {\bf a. } It is given that S(t) is the average size of trees, E(t) is the energy reseve and B is the constant budworm population. Now $r_S$ and $r_E$ are the growth rates of S and E respectively. $K_S$ and $K_E$ are their respective carrying capacities and P is the predation rate of budworms on the foliage.\\
+	\indent {\bf b. }Given
+	$$\dot{S}=r_SS(1-\frac{S}{K_S}\frac{K_E}{E}) \text{ and } \dot{E}=r_EE(1-\frac{E}{K_E}) - P\frac{B}{S}.$$
+	Let $x=\frac{S}{K_S}$ and $y=\frac{E}{K_E}$. Dividing $\dot{S}$ by $K_S$ and $\dot{E}$ by $K_E$, we get
+	$$\frac{dx}{dt} = r_Sx(1-\frac{x}{y}) \text{ and } \frac{dy}{dt} = r_Ey(1-y) - \frac{PB}{K_EK_Sx}.$$
+	Let $\tau = r_st$, then
+	$$\frac{dx}{d\tau} = x(1-\frac{x}{y}) \text{ and } \frac{dy}{d\tau} = \frac{r_E}{r_S}y(1-y) - \frac{PB}{r_SK_EK_Sx},$$
+	thus
+	$$\frac{dx}{d\tau} = x(1-\frac{x}{y}) \text{ and } \frac{dy}{d\tau} = \sigma y(1-y) - \frac{\rho}{x},$$
+	where $\sigma = \frac{r_E}{r_S} \text{ and } \rho = \frac{PB}{r_SK_EK_S}$.\\
+	\bigskip
+	
+	\indent {\bf c. } 
+	As seen in the plot, the nullclines for x and y intersect twice when $\rho$ is small, i.e., when B is small. When $\rho$ is large, i.e., when B is large, they do not intersect. Then there are two fixed points when B is small and none when B is large. Thus, a saddle-node bifurcation occurs at the critical value of B.\\
+	\begin{center}
+		\includegraphics[width=0.4\textwidth]{8110c.png}
+	\end{center}
+	\indent {\bf d. }\\
+	\begin{center}
+		Phase portrait when $\sigma = 1$ and $\rho = .5$\\
+		\includegraphics[width=0.4\textwidth]{8110dpsmall.png}\\
+		\bigskip
+		Phase portrait when $\sigma = 1$ and $\rho = 5$\\
+		\includegraphics[width=0.4\textwidth]{8110dplarge.png}\\
+	\end{center}
+	\bigskip\noindent
+	{\bf 8.2.10 Bacterial Respiration} \\
+	{\bf Solution:} \\
+	The equations are given by
+	\begin{align*}
+	\dot{x} &= B - x - \frac{xy}{1+qx^2}\\
+	\dot{y} &= A - \frac{xy}{1+qx^2}
+	\end{align*}
+	where $A,B,q,x,y > 0$. The fixed points are given by
+	\begin{align*}
+	x^\star &= B - A\\
+	y^\star &= \frac{-A}{A-B}\left(1+q(A-B)^2\right)
+	\end{align*}
+	The Jacobian matrix at the fixed point is given by
+	\begin{equation*}J=
+	\left(
+	\begin{array}{cc}
+	\frac{2 q y x^2}{\left(q x^2+1\right)^2}-\frac{y}{q x^2+1}-1 & -\frac{x}{q x^2+1} \\
+	\frac{2 q x^2 y}{\left(q x^2+1\right)^2}-\frac{y}{q x^2+1} & -\frac{x}{q x^2+1} \\
+	\end{array}
+	\right) \rightarrow
+	\left(
+	\begin{array}{cc}
+	A \left(\frac{2}{q (A-B)^2+1}-1\right)-1 & \frac{A-B}{q (A-B)^2+1} \\
+	A \left(\frac{2}{q (A-B)^2+1}-1\right) & \frac{A-B}{q (A-B)^2+1} \\
+	\end{array}
+	\right)
+	\end{equation*}
+	$$\tau = \frac{3 A-B}{q (A-B)^2+1}-A-1\:\text{and}\:\Delta = \frac{B-A}{q (A-B)^2+1}$$\\ Since $\Delta>0$ and $\tau<0$ the fixed point is stable.
+	The nullclines are given by and vector field shown below for $A=1,B=2,q=1$
+	\begin{align*}
+	y&=\frac{(B-x)(1+qx^2)}{x}\\
+	y&=\frac{A(1+qx^2)}{x}
+	\end{align*}
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=.4\textwidth]{8210}
+	\end{figure}
+	\\
+	{\bf 8.3.2 Chemical Oscillator}\\
+	{\bf Solution:}\\
+	\indent
+	{\bf a. } Let
+	\begin{align*}
+	\dot{x}&=a-x+x^2y\\
+	\dot{y}&=b-x^2y.
+	\end{align*}
+	Let us consider $\frac{\dot{y}}{\dot{x}}$ i.e., $\frac{b-x^2y}{a-x+x^2y}.$ Using the figure in letter e below, we have clearly seen that all trajectories eventually enter a certain trapping region, to be determine.\\
+	
+	\indent
+	{\bf b. } To show that the system has a unique fixed point, let $\dot{x}=0$ and $\dot{y}=.$ That is\\
+	\begin{align}
+	a-x+x^2y=0\\
+	b-x^2y=0
+	\end{align}
+	Now, the second equation is equal to $b=x^2y$. Then substituting this to equation 1, we have $a-x+b=0 \Rightarrow x=a+b.$ Now, if $x=a+b,$ substituting this to equation 2, we have
+	\begin{align*}
+	b&=x^2y\\
+	b&=(a+b)^2y\\
+	\Rightarrow y=\frac{b}{(a+b)^2}.
+	\end{align*}
+	Thus, we only have one solution to the system that is $\left(a+b,\frac{b}{(a+b)^2}\right).$ Hence, the system has a unique fixed point.\mycbox{black}\\
+	To classify the fixed point, let's analyze the system first by considering its Jacobian matrix. That is 
+	\begin{align*}
+	J&=\left(\begin{array}{cc} 2xy-1 & x^2 \\
+	-2xy & -x^2
+	\end{array}\right).
+	\end{align*}
+	Now, 
+	\begin{align*}
+	J\left(a+b,\frac{b}{(a+b)^2}\right)&=\left(\begin{array}{cc} \frac{2b}{a+b}-1 & (a+b)2 \\
+	-\frac{2b}{a+b} & -(a+b)^2
+	\end{array}\right).\\ 
+	\end{align*}
+	$\Rightarrow$ determinant of $J(\left(a+b,\frac{b}{(a+b)^2}\right)=(a+b)^2$ and trace is $\tau=\frac{2b}{a+b}-1-(a+b)^2.$ Now the fixed point is stable if $det\left(J\left(a+b,\frac{b}{(a+b)^2}\right)\right)=(a+b)^2>0$ and trace $\tau=\frac{2b}{a+b}-1-(a+b)^2<0$.\\
+	Notice that the determinant is always positive and the trace is negative, that is if $\tau=\frac{2b}{a+b}-1-(a+b)^2<0\Rightarrow b-a<(a+b)^3.$ Hence, it is stable if this condition is satisfied.\\
+	\indent
+	{\bf c. } To show that the system undergoes a Hopf bifurcation when $b-a=(a+b)^3,$ let us consider the trace of the system. Now, hopf bifurcation occurs in this system if the trace is zero. That is,
+	\begin{align*}
+	\frac{2b}{a+b}-1-(a+b)^2&=0\\
+	\frac{2b}{a+b}-1&=(a+b)^2\\
+	2b-(a+b)&=(a+b)^2(a+b)\\
+	2b-a-b&=(a+b)^3\\
+	b-a&=(a+b)^3. \mycbox{black}
+	\end{align*}
+	\indent
+	{\bf d. } Now, please refer the diagram in letter e to determine the type of hopf bifurcation.\\
+	
+	Notice, in figure 1 we have $a=0, b=1$ which are the parameter values. Now, in figure 2, $a=1/2, b=0.9$ we notice that for a small disturbance the equilibrium state slowly loses its stability. This is a supercritical hopf bifurcation.\\
+	
+	%{\bf e. } Stability Diagram in $a$ and $b.$\\
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=4cm]{8_3_2_d}
+		\caption{}
+	\end{figure}
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=4cm]{8_3_2_d_2}
+		\caption{}
+	\end{figure}
+	
+	
+	%\bigskip\noindent
+	%{\bf 8.4.9 Resonance and Cusp Catastrophy} \\
+	%{\bf Solution:} \\
+	%\noindent
+	{\bf 8.5.3 Logistic with Periodically varying carrying capacity }\\
+	{\bf Solution: }\\
+	{\bf a. } Let's consider the logistic equation $\dot{N}=rn\left(1-\frac{N}{K(t)}\right)=f(N)$ where the carrying capacity is positive, smooth and $T-$ periodic in T. Given $K$ which is fixed, the fixed points of the logistic equation are $N=0$ and $N=K.$ Now, applying the first derivative, $N=K$ is a stable fixed point. Thus for carrying capacity $K$ we have a phase portrait\\
+	(Please insert phase portrait)\\
+	For $0< N_1< Kmin$ and $N_2>Kmax,$ the vector field points inward along the infinite strip. Let's consider the Poincare Map constructing by integrating over the interval $0<t<Y.$
+	\begin{itemize}
+		\item[1. ] $P(N_1)>N_1 , P(N_2)<N_2$\\
+		\item[2. ] $P(N)$ is continuous of $K(t)$ is sufficiently smooth.\\
+		\item[3. ] $P$ is strictly increasing. If $\hat{N_0}>N_0$ then $P(\hat{N_0})>P(N_0).$
+	\end{itemize}
+	(Please insert)\\
+	It follows that $N^*$ is the fixed point such that $P(N^*)=N^*,$. This is a closed orbit. We have $N_1<N^*<N_2$ but since $N_1$ can be made as close to $K_1$ as we like and $N_2$ can be made as close to $K_2$ as we like. $K_1\leq N^* \leq K_2.$\\
+	{\bf b. } To answer the question if the limit cycle necessarily unique, we suppose that there are two limit cycles: $N_o(t)>N_1(t), 0<t \leq T.$ There is this period $T.$ Let's consider the integral 
+	\begin{align*}
+	I=\int_0^T\frac{N_0(t)-N_1(t)}{K(t)} dt 
+	\end{align*}
+	\begin{enumerate}
+		\item Since $N_0> N_1$ and $K>0$ it follows $I>0.$\\
+		\item By the logistic equation $\frac{\dot{N}}{rN}=1-\frac{N}{K}$ so $\frac{N}{K}=1-\frac{\dot{N}}{rN}.$ Then $\int_0^T \frac{N(t)}{K(t)} dt=\int_0^T \left(1-\frac{\dot{N}}{rN}\right) dt=T-\frac{1}{r} \int_0^T \left[\frac{d}{dt} ln N(t)\right] dt=T-\frac{1}{r}\left[ln N(T)-ln N(0)\right]=T$ where we use the T-periodicity of N. Then it follows that 
+	\end{enumerate}
+	\begin{align*}
+	I=\int_0^T \frac{N_0(t)}{K(t)} dt-\int_0^T \frac{N_1(t)}{K(t)} dt=T-T=0
+	\end{align*} 
+	which contradicts to 1. It follows that the limit cycle must be unique. \mycbox{black}\\
+	
+	\noindent
+	{\bf 8.6.7 Mechanical Example of Quasi-periodicity}
+	{\bf Solution:}\\
+	
+	{\bf a. } Note that if there is a circular motion, there is no change of the radius $\ddot{r=0.}$ Then we can write 
+	\begin{align*}
+	m\ddot{r}=0=\frac{h^2}{mr_0^3}-k \Longleftrightarrow r_0=\sqrt[3]{\frac{k^2}{mk}}.
+	\end{align*}
+	Then afterwards, the second equation can be arranged as 
+	\begin{align*}
+	\dot{\theta}=\omega_0=\frac{h}{mr_0^2}\Longleftrightarrow \omega_0=\sqrt[3]{\frac{k^2}{hm}}.
+	\end{align*}
+	
+	\indent
+	{\bf b. } Now, taking into account the small radial perturbations $r=r_0+\delta r$ gives the equation below
+	\begin{align*}
+	m\frac{d^2}{dt^2}\left(r_0+\delta r\right)=\frac{h}{m \left(r_0+\delta r\right)^3}-k.
+	\end{align*}
+	
+	
+	\noindent
+	{\bf 8.7.3 Overdamped System with square-wave forcing } \\
+	{\bf Solution} \\
+	\indent {\bf a.} Let $x(0) = x_0$. If $0 < t < \frac{T}{2}$, 
+	\begin{align*}
+	\dot{x} + x &= A \\
+	\frac{dx}{dt} &= -x + A\\
+	\frac{dx}{-x+A} &= dt\\
+	-ln(-x+A) &= t+c \rightarrow c=-ln(-x_0 + A)\\ 
+	-ln(-x+A) &= t-ln(-x_0 + A)\\
+	x - A &= -e^t (-x_0 + A)\\
+	x &= x_0e^t + A(1-e^t).
+	\end{align*}
+	Evaluating for $0 < t < \frac{T}{2}$, $x_0e^{\frac{T}{2}} + A(1-e^{\frac{T}{2}}) - x_0$.\\
+	Similarly, when $\frac{T}{2} < t < T$,$\dot{x} + x = -A$, then $x = x_0e^t + A(e^t - 1)$. \\
+	Evaluating for $\frac{T}{2} < t < T$, $x_0e^T + A(e^T - 1) - x_0e^{\frac{T}{2}} - A (e^{\frac{T}{2}} - 1)$.\\
+	Then for x(T), we get, $x_0(e^T - 1) + A(e^{\frac{T}{2}} - 1)^2$. Using $x(T) = x(-T) = x(0) = x_0$, we get the desired result.\\
+	\indent {\bf b.} Since the period is T, $x(T) = x(0) = x_0$. Then $x(T) = x_0e^{-T} + A(1-e^{-\frac{T}{2}})^2 = x_0$. It is then enough to show that for $x_0 = -Atanh(\frac{T}{4})$, $x_0 (e^{-T} - 1) = A(1-e^{-\frac{T}{2}})^2$.\\
+	\begin{align*}
+	x_0 (e^{-T} - 1) &= -Atanh(\frac{T}{4})(e^{-T} - 1)\\
+	&= -A(\frac{e^{\frac{T}{4}} - e^{\frac{-T}{4}}} {e^{\frac{T}{4}} + e^{\frac{-T}{4}}})(e^{-T} - 1)\\
+	&= A(\frac{e^{\frac{-5T}{4}} - e^{\frac{-3T}{4}} - e^{\frac{-T}{4}} - e^{\frac{T}{4}}}{e^{\frac{T}{4}} + e^{\frac{-T}{4}}})\\
+	&= A(\frac{e^{\frac{T}{4}} ( e^{\frac{-3T}{2}} - e^{-T} - e^{\frac{-T}{4}} - e^{\frac{T}{4}})}{e^{\frac{T}{4}} (1 + e^{\frac{-T}{2}})})\\
+	&= A(1 - e^{\frac{-T}{2}})^2.
+	\end{align*}
+	\indent {\bf c.}
+	As $T \to 0, x(T) \to x_0 = x(0)$. This makes sense since the cycle shortens infinitely, thus the solution is constant. As $T \to \infty, x(T) \to - A$. This makes sense since F(t) = - A as T is approached from the left.\\
+	\indent {\bf d.} At A = 0.5 and T = 2, \\
+	\begin{center}
+		\includegraphics[width=0.4\textwidth]{873d}
+	\end{center}
+	\bigskip
+	\indent {\bf e.} At A = 0.5 and T = 2, \\
+	\begin{center}
+		\includegraphics[width=0.4\textwidth]{873e}
+	\end{center}
+	
+	{\bf 9.1.4 Laser Models}\\
+	{\bf Solution: } \\
+	\indent
+	{\bf a. } To show that the non-lasing state loses stability above a threshold value of $\lambda$, we consider $\dot{P}=0$ which gives $ED=P$ and $\dot{D}=0$ that gives $D=\lambda+1-\lambda EP.$ Thus,
+	\begin{align*}
+	P&=\frac{(\lambda+1)E}{\lambda E^2+1}\\
+	\dot{E}&=k(\frac{(\lambda+1)E}{\lambda E^2+1}-E)
+	\end{align*}
+	Then if $\lambda = 0$, there are an infinite number of fixed points and if $\lambda \neq 0$, the fixed points are $E = 0, \pm 1$. To find the stability at $E^* = 0$,\\
+	\begin{align*}
+	f'(\dot{E}) &= k(\frac{(\lambda E^2 + 1)(\lambda + 1) - (\lambda +1)E(2\lambda E)}{(\lambda E^2 + 1)^2}-1)\\
+	f'(\dot{E}) &= k(\frac{(\lambda + 1)(1 - \lambda E^2)}{(\lambda E^2 + 1)^2}-1)\\
+	f'(0) &= k\lambda
+	\end{align*}
+	Then if $\lambda = 0$, f'(0) = 0, a bifurcation point. If $\lambda < 0$, $f'(0) < 0$, stable, and if $\lambda > 0$, $f'(0) > 0$, unstable. Thus, it is a degenerate pitchfork bifurcation \\
+	\indent
+	{\bf b. } Let $E=\alpha x$ , $P = \alpha y$ and $t_{laser} = \frac{\sigma}{\kappa}t_{Lorenz}$. Then,
+	$$\frac{dx}{dt_{Lorenz}} = \frac{\sigma}{\alpha \kappa} \frac{dE}{dt_{laser}} = \frac{\sigma}{\alpha \kappa} \dot{E} =\frac{\sigma}{\alpha} (P - E) = \sigma(y-x)$$ 
+	Likewise,
+	$$\frac{dy}{dt_{Lorenz}} = \frac{\sigma}{\alpha \kappa} \frac{dP}{dt_{laser}} = \frac{\sigma}{\alpha \kappa} \dot{P} =\frac{\sigma \gamma_1}{\alpha \kappa} (ED - P) = \frac{\sigma \gamma_1}{\alpha \kappa} (\alpha xD - \alpha y) = \frac{\sigma \gamma_1}{\kappa}(xD - y)$$. 
+	Thus, $\frac{\sigma \gamma_1}{\kappa} = 1 \rightarrow \gamma_1 = \frac{\kappa}{\sigma}$. It also shows that D = r - z.
+	$$\frac{dz}{dt_{Lorenz}} = -\frac{\sigma}{\kappa} \frac{dD}{dt_{laser}} = -\frac{\sigma}{\kappa}\dot{D} = -\frac{\sigma \gamma_2}{\kappa}(\lambda + 1 - D - \lambda EP) = -\frac{\sigma \gamma_2}{\kappa} (\lambda + 1 - r + z - \lambda \alpha ^2xy).$$
+	Now, $xy - bz = \dot{z} = -\frac{\sigma \gamma_2}{\kappa} (\lambda + 1 - r) -\frac{\sigma \gamma_2}{\kappa} z + \frac{\sigma \gamma_2}{\kappa} \lambda \alpha ^2xy$. 
+	Thus,
+	\begin{align*}
+	\lambda + 1 - r = 0 &\rightarrow \lambda = r-1\\
+	\frac{\sigma \gamma_2}{\kappa} = b &\rightarrow \gamma_2 = \frac{b \kappa}{\sigma}\\
+	\frac{\sigma \gamma_2}{\kappa} \lambda \alpha ^2 = 1 &\rightarrow b(r-1)\alpha ^2 = 1\\
+	&\rightarrow \alpha = (b(r-1))^{-\frac{1}{2}}
+	\end{align*}
+	\noindent
+	{\bf 9.2.6 Geometric Reversals} ( The leaky bucket)\\
+	{\bf Solution:}\\
+	\indent
+	{\bf a. } To show that that the system is dissipative, we consider first the divergence vector field that is
+	\begin{align*}
+	\nabla \cdot \vec{f} &=\frac{\partial f_1}{\partial x}+\frac{\partial f_2}{\partial y}+\frac{\partial f_3}{\partial z}\\
+	&=-v-v+0=-2v
+	\end{align*}
+	Therefore the volume $V$ follows the relationship that $\dot{V}=-2vV$ and $V=V(0)e^{-2vt} \cdot V$ is decreasing, so we can say that the system is dissipative.\\
+	{\bf b. } We note that $x^*=\pm k$ and $y^*=\pm k^-1, x^*y^*=(\pm k)(\pm k^-1)=1$ and $\dot{z}=0$ is satisfied. Since $z=vk^2,$ we have $zy-vx=(vk^2)(\pm k^-1)-v(\pm vk)=(\pm vk)-(\pm vk)=0$ and $\dot{x}=0$ is satisfied.\\
+	Finally by setting $\dot{y}=0,$ we have
+	\begin{align*}
+	vy=(z-a)x \rightarrow \pm vk^-1=\pm (vk^2-a)k \rightarrow vk^-1=(vk^2-a)k \rightarrow vk^{-2}=vk^2-a \rightarrow v(k^2-k^{-2})=a
+	\end{align*}
+	
+	{\bf c. } The The Jacobian Matrix at the fixed point $\left(k,k^-1,vk^2\right)$ is given below
+	\begin{align*}
+	J&=\begin{bmatrix}
+	-v & z & y\\
+	z-a & -v & a\\
+	-y & -x & 0
+	\end{bmatrix}
+	&= \begin{bmatrix}
+	-v & vk^2 & k^-1\\
+	vk^2-a & -v & k\\
+	-k^-1 & -k & 0
+	\end{bmatrix}
+	\end{align*}
+	So the eigenvalues of the Jacobian matrix is
+	\begin{align*}
+	det\begin{bmatrix}
+	-v-\lambda & vk^2 & k^-1\\
+	vk^2-a & -v-\lambda & k\\
+	-k^-1 & -k & -\lambda
+	\end{bmatrix}=0.
+	\end{align*}
+	Then we have 
+	\begin{align*}
+	\lambda^3+2v\lambda^2+(k^2+k^-2)\lambda+2v(k^2+k^-2)=0
+	\end{align*}
+	Since $v,k^2>0,$ we have
+	\begin{align*}
+	\lambda_1+\lambda_2+\lambda_3=-2v<0; \lambda_1 \lambda_2+\lambda_2 \lambda_3+\lambda_3 \lambda_1=k^2+k^-2>0 \text{and} \lambda_1 \lambda_2 \lambda_3=-2v(k^2+k^-2)<0.
+	\end{align*}
+	The third relation only yields two possible cases: (1) $\lambda_1<0, \lambda_{2,3}>0$ and (2) $\lambda_{1,2,3}<0.$ However, for case (1), we have
+	\begin{align*}
+	\lambda_1 \lambda_2+\lambda_2 \lambda_3+\lambda_3 \lambda_1=\lambda_1(\lambda_2+\lambda_3)+\lambda_2 \lambda_3 <-(\lambda_2+\lambda_3)^2+\lambda_2 \lambda_3=-\lambda_2^2-\lambda_2 \lambda_3-\lambda_3^2<0
+	\end{align*} 
+	which contradicts to the second relation. Therefore, all three eigenvalues are negative and the fixed point is stable.\\
+	
+	\bigskip\noindent
+	{\bf 9.3.10 Time Horizon} \\
+	{\bf Solution:} \\
+	Here is the graph of the Lorenz equations when $r=28,\sigma=10,b=8/3.$\\
+	
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=4cm]{9_3_10}
+		\caption{}
+	\end{figure}
+	
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=4cm]{9_3_10_xt}
+		\caption{}
+	\end{figure}
+	
+	
+	{\bf 9.4.2 Tent Map}\\
+	{\bf Solution:}\\
+	\indent
+	{\bf a. } It is called a tent map because the graph of f(x) looks like a triangle with vertices at (0,0), (1,0) and (0,1). Thus, if the x-axis is the ground, then f(x) looks like a tent set-up on it.\\
+	\indent
+	{\bf b. } If $0 \leq x \leq \frac{1}{2}$, then $f(x^*) = 2x^* = x^* \rightarrow x^* = 0$. Also, $|f'(x^*)| = |2| > 1$, unstable.\\
+	\indent 
+	If $\frac{1}{2} \leq x \leq 1$, then $f(x^*) = 2- 2x^* = x^* \rightarrow x^* = \frac{2}{3}$. Also, $|f'(x^*)| =|- 2| > 1$, unstable.\\
+	\indent
+	{\bf c. }
+	\begin{table}[h!]
+		\centering
+		\begin{tabular}{c|c||c|c|c|c|c}
+			Case &Conditions & $f(f(x))$ & $x^*$ & Period 2? & $f'(f(x^*))$ & Stability\\
+			\hline
+			1&$0\leq x \leq \frac{1}{2}, 0\leq f(x) \leq \frac{1}{2}$  & 2(2x) = 4x & 0 & No & & \\
+			2&$0\leq x \leq \frac{1}{2}, \frac{1}{2} \leq f(x) \leq 1$  & 2-2(2x) = 2 - 4x & $\frac{2}{5}$ & Yes &-4&Unstable\\
+			3&$\frac{1}{2} \leq x \leq 1, 0\leq f(x) \leq \frac{1}{2}$  & 2(2-2x) = 4 - 4x & $\frac{4}{5}$ & Yes &-4&Unstable\\
+			4&$\frac{1}{2} \leq x \leq 1, \frac{1}{2} \leq f(x) \leq 1$  & 2-2(2-2x) = -2 + 4x & $\frac{2}{3}$ & No & & \\
+		\end{tabular}
+	\end{table}\\
+	{\bf d. }
+	\begin{table}[h!]
+		\centering
+		To check for Period 3:\\
+		\bigskip
+		\begin{tabular}{c|c||c|c|c|c|c}
+			Case &Conditions & $f(f(f(x)))$ & $x^*$ & Period 3? & $f'f((f(x^*)))$ & Stability\\
+			\hline
+			1&Case 1 in c, $0\leq f(f(x)) \leq \frac{1}{2}$  & 2(4x) = 8x & 0 & No & & \\
+			2&Case 1 in c, $\frac{1}{2} \leq f(f(x)) \leq 1$  & 2-2(4x) = 2 - 8x & $\frac{2}{9}$ & Yes &-8 & Unstable\\
+			3&Case 2 in c, $0\leq f(f(x)) \leq \frac{1}{2}$  & 2(2-4x) = 4 - 8x & $\frac{4}{9}$ & Yes &-8 & Unstable \\
+			4&Case 2 in c, $\frac{1}{2} \leq f(f(x)) \leq 1$  & 2-2(2-4x) = -2 + 8x & $\frac{2}{7}$& Yes &8 & Unstable \\
+			5&Case 3 in c, $0\leq f(f(x)) \leq \frac{1}{2}$  & 2(4-4x) = 8 - 8x & $\frac{8}{9}$ & Yes &-8 & Unstable \\
+			6&Case 3 in c, $\frac{1}{2} \leq f(f(x)) \leq 1$  & 2-2(4-4x) = -6 + 8x & $\frac{6}{7}$ & Yes &8 & Unstable \\
+			7&Case 4 in c, $0\leq f(f(x)) \leq \frac{1}{2}$  & 2(-2+4x) = -4 + 8x & $\frac{4}{7}$ & Yes &8 & Unstable \\
+			8&Case 4 in c, $\frac{1}{2} \leq f(f(x)) \leq 1$  & 2-2(-2+4x) = 6 - 8x & $\frac{2}{3}$ & No & & \\
+		\end{tabular}
+	\end{table}\\
+	\begin{table}[h!]
+		\centering
+		To check for Period 4:\\
+		\bigskip
+		\begin{tabular}{c|c||c|c|c|c|c}
+			Case &Conditions & $f(f(f(f(x))))$ & $x^*$ & Period 4? & $f'^4(x^*)$ & Stability\\
+			\hline
+			1&Case 1 above, $0\leq f(f(f(x))) \leq \frac{1}{2}$  & 2(8x) = 16x & 0 & No & & \\
+			2&Case 1 above, $\frac{1}{2} \leq f(f(f(x))) \leq 1$  & 2-2(8x) = 2 - 16x & $\frac{2}{17}$ & Yes &-16 & Unstable\\
+			3&Case 2 above, $0\leq f(f(f(x))) \leq \frac{1}{2}$  & 2(2-8x) = 4 - 16x & $\frac{4}{17}$ & Yes &-16 & Unstable \\
+			4&Case 2 above, $\frac{1}{2} \leq f(f(f(x))) \leq 1$  & 2-2(2-8x) = -2 + 16x & $\frac{2}{15}$ & Yes &16 & Unstable\\
+			5&Case 3 above, $0\leq f(f(f(x))) \leq \frac{1}{2}$  & 2(4-8x) = 8-16x &$\frac{8}{17}$ & Yes &-16 & Unstable \\
+			6&Case 3 above, $\frac{1}{2} \leq f(f(f(x))) \leq 1$  & 2-2(4-8x) = -6 + 16x & $\frac{2}{5}$ & No & &\\
+			7&Case 4 above, $0\leq f(f(f(x))) \leq \frac{1}{2}$  & 2(-2+8x) = -4 + 16x & $\frac{4}{15}$ & Yes &16 & Unstable\\
+			8&Case 4 above, $\frac{1}{2} \leq f(f(f(x))) \leq 1$  & 2-2(-2+8x) = 2 - 16x & $\frac{2}{17}$ & Yes &-16 & Unstable\\
+			9&Case 5 above, $0\leq f(f(f(x))) \leq \frac{1}{2}$  & 2(8-8x) = 16 - 16x & $\frac{16}{17}$ & Yes &-16 & Unstable\\
+			10&Case 5 above, $\frac{1}{2} \leq f(f(f(x))) \leq 1$  & 2-2(8-8x) = -14 + 16x & $\frac{14}{15}$ & Yes &16 & Unstable\\
+			11&Case 6 above, $0\leq f(f(f(x))) \leq \frac{1}{2}$  & 2(-6+8x) = -12 + 16x & $\frac{4}{5}$ & No & & \\
+			12&Case 6 above, $\frac{1}{2} \leq f(f(f(x))) \leq 1$  & 2-2(-6+8x) = 10 - 16x & $\frac{10}{17}$ & Yes &-16 & Unstable\\
+			13&Case 7 above, $0\leq f(f(f(x))) \leq \frac{1}{2}$  & 2(-4+8x) = -8 + 16x & $\frac{8}{15}$ & Yes &16 & Unstable\\
+			14&Case 7 above, $\frac{1}{2} \leq f(f(f(x))) \leq 1$  & 2-2(-4+8x) = 6 - 16x & $\frac{6}{17}$ & Yes &-16 & Unstable\\
+			15&Case 8 above, $0\leq f(f(f(x))) \leq \frac{1}{2}$  & 2(6-8x) = 12 - 16x & $\frac{12}{17}$ & Yes &-16 & Unstable\\
+			16&Case 8 above, $\frac{1}{2} \leq f(f(f(x))) \leq 1$  & 2-2(6-8x) = -10 + 16x & $\frac{2}{3}$ & No & & \\
+		\end{tabular}
+	\end{table}\\
+	\bigskip
+	\noindent
+	{\bf 9.5.4 Hysteresis}\\
+	{\bf Solution: }\\
+	Now, given $\sigma=10, b=8/3$ and $r=24.4+sin \omega t,$ the solution can be seen through the graph below. The last three graphs, $y(t),x(t),z(t)$ clearly show that there is a striking hysteresis effect between an equilibrium and a chaotic state.
+	
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=4cm]{9_5_4_1}
+		\caption{}
+	\end{figure}
+	
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=4cm]{9_5_4_2}
+		\caption{}
+	\end{figure}
+	
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=4cm]{9_5_4_3}
+		\caption{}
+	\end{figure}
+	
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=4cm]{9_5_4_4}
+		\caption{}
+	\end{figure}
+	
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=4cm]{9_5_4_5}
+		\caption{}
+	\end{figure}
+	
+	\noindent
+	{\bf 9.6.3 Synchronized Chaos}\\
+	{\bf Solution: }\\
+	{\bf a. } Below are the plots for the 3 D graph of the Lorenz Equation and the system associated in exercise 9.6.2 respectively. Then followed by $y(t)$ and $y_r(t).$
+	
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=4cm]{9_6_3_xyz}
+		\caption{ $r=60, \sigma=10,b=8/3$}
+	\end{figure}
+	
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=4cm]{9_6_3_xyzr}
+		\caption{Graph of the system associated in 9.6.2}
+	\end{figure}
+	
+	Here are the graphs of $y(t)$ and $y_r(t).$
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=4cm]{9_6_3_a_yt}
+		\caption{$y(t)$}
+	\end{figure}
+	
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=4cm]{9_6_3_a_yrt}
+		\caption{$y_r(t)$}
+	\end{figure}
+	
+	
+	{\bf b. } Here are the the plot of the projection $(y,z)$ of both trajectories.
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=4cm]{9_6_3_b_projyt}
+		\caption{$y(t)$}
+	\end{figure}
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=4cm]{9_6_3_b_projyrt}
+		\caption{$y_r(t)$}
+	\end{figure}
+	
+	
+	\noindent
+	{\bf 10.1.12 Newton's Method} 
+	{\bf Solution:}\\
+	\indent
+	{\bf a. }Let $g(x) = x^2-4 = 0$. Then $g'(x) = 2x$. Thus,
+	$$x_{n+1} = f(x_n) = x_n - \frac{g(x_n)}{g'(x_n)} = x_n -\frac{x_n^2-4}{2x_n} = \frac{2x_n^2 - x_n^2 + 4}{2x_n} = \frac{x_n^2 + 4}{2x_n}$$\\
+	\indent {\bf b.}
+	\begin{align*}
+	f(x^*) = \frac{x^{*2}+4}{2x^*} &= x^*\\
+	x^{*2} + 4 &= 2x^{*2}\\
+	x^{*2} &= 4\\
+	x &= \pm 2 .
+	\end{align*}
+	\indent {\bf c.}
+	\begin{align*}
+	f(x) &= \frac{x^2 + 4}{2x} = \frac{x}{2} + 2x^{-1}\\
+	f'(x) &= \frac{1}{2} - \frac{2}{x^2} =0, \text{at x=}\pm 2 \text{ ,superstable}
+	\end{align*}
+	\indent {\bf d.}
+	\begin{center}
+		\includegraphics[width=0.4\textwidth]{10112.png}
+	\end{center}
+	%\bigskip \noindent
+	%{\bf 10.2.4 Standard Route to Chaos}\\
+	%{\bf Solution:} \\
+	\noindent
+	{\bf 10.3.7 Decimal Shift Map}\\
+	{\bf Solution: }\\
+	
+	{\bf a. } The Decimal Shift Map on
+	\begin{align*}
+	x_{n+1}=10x_n(mod1)
+	\end{align*} 
+	is given by the diagram below.
+	
+	\begin{figure}[htp]
+		\centering
+		\includegraphics[width=4cm]{10_3_7_a.jpg}
+		\caption{}
+	\end{figure}
+	
+	{\bf b. } We see that all fixed points $\in [0,1]$ since for $x_n \in [o,1], x_n=0.1 p_n+0.01q_n+0.001r_n+...$ where $p_n,q_n,r_n$ are all integers then \\
+	\begin{align*}
+	x_{n+1}&=[0.1 p_n+0.01q_n+0.001r_n+...]mod1\\
+	&=0.1 q_n+0.01r_n+...\\
+	\end{align*} 
+	$\Rightarrow$ if we want $x_{n+1}=x_n$ then \\
+	\begin{align*}
+	p_n &=q_n\\            
+	q_n &=r_n \\
+	&\vdots\\
+	\Rightarrow x^* &= 0.111111...=\frac{1}{9}\\
+	x^*&= 0.22222...\\
+	x^*&= 0.3333...\\
+	x^*&=0.4444....\\
+	& \vdots \\
+	x^*&= 0.99999...=1
+	\end{align*}
+	which are all fixed points.\\
+	{\bf c. } To show that the map has periodic points, here are the periodic points are which are all unstable. \\
+	\begin{align*}
+	x_0&=0.123123123...\\
+	x_1&=0.231231231...\\
+	x_2&=0.312312312...\\
+	x_3&=0.123123...=x_0\\
+	\end{align*} 
+	This implies that all rational numbers are either fixed points or cycles.\\
+	Now, let's construct cycles of any length this way. To prove the stability of the cycle we calculate ${\pi_{x_i \in cycle}}_{\left(p numbers\right)} |f'(x_i)|= {\pi_{x_i \in cycle}}_{\left(p numbers\right)} 10 =10^p >1. \Rightarrow$ the cycles are all unstable.\\
+	{\bf d. } To show that the map has infinitely many periodic orbits,we note that periodic orbits correspond to $\mathbb{Q}\cap I.$ Then the periodic orbits correspond to $(\mathbb{R} \backslash \mathbb{Q})\cap I$ i.e., the set of irrational numbers in $[0,1]$ which is infinite. \\
+	{\bf e. } To show that the map has sensitive dependence on initial conditions, we consider the Liapunov exponent
+	\begin{align*}
+	\lambda=\lim_{n\to\infty} \frac{1}{n} \sum_{i=1}^n ln |f'(x_i)|=ln 10 
+	\end{align*}
+	$\Rightarrow$ the map is chaotic; $\forall x_0$ which is not a fixed point nor on the unstable cycle, i.e., all irrational numbers in [0,1].\\
+	\noindent
+	%{\bf 10.4.9 Orbit Diagram} 
+	%Let $x_{n+1} = x_ne^{-r(1-x_n)}$ and the figures below shows $r<0$, $r=0$ and $r>0$\\
+	{\bf 10.4.9 Period Doubling in Lorenz} 
+	{\bf Solution:}\\
+	At r=148.5,
+	\begin{center}
+		\includegraphics[width=0.4\textwidth]{1049-1485.png}\\
+	\end{center}
+	\bigskip
+	At r=147.5,
+	\begin{center}
+		\includegraphics[width=0.4\textwidth]{1049-1475.png}\\
+	\end{center}
+	{\bf 10.5.2 Lyapunov for decimal shift } \\
+	The map has slope has derivative $f'(x_n)=10$ except where $10*x_n (\text{mod} 1) = 0$ where the derivative does not exist. The Liapunov exponent is given by
+	\begin{align*}
+	\lambda &= \lim_{n \rightarrow \infty}\left\lbrace \frac{1}{n} \sum_{i=0}^{n-1} \|\log(f'(x_n))\|\right\rbrace \\
+	\lambda &= \lim_{n \rightarrow \infty} \left\lbrace \frac{n-1}{n} \log(10) \right\rbrace \\
+	\lambda &= \log(10) = 2.30259
+	\end{align*}
+	
+	\bigskip\noindent
+	{\bf 10.6.4 Period 4}\\
+	{\bf Solution: }\\
+	{\bf a. } To show that only two patterns are possible for period -4 orbits: RLL and RLR, we refer table 1 below. Note that we are given the logistic map $x_{n+1}=rx_n(1-x_n)$ which is governed by the U- Sequence. Table 1, clearly shows that there are only two patterns which are possible for period - 4 orbits: RLL and RLR.
+	\begin{table}[h!]
+		\centering
+		\caption{U-Sequence through Period 6 (from MSS 73)}
+		\label{tab:table1}
+		\begin{tabular}{ccc}
+			\toprule
+			Period & U-Sequence & Parameter for Logistic Map\\
+			\midrule
+			2 & R & 3.2361\\
+			4 & RLR & 3.4986\\
+			6 & RLRRR & 3.6275\\
+			5 & RLRR & 3.7389\\
+			3 & RL & 3.8319\\
+			6 & RLLRL & 3.8446\\
+			5 & RLLR & 3.9057\\
+			6 & RLLRR & 3.9375\\
+			4 & RLL & 3.9603\\
+			6 & RLLLR & 3.9778\\
+			5 & RLLL & 3.9903\\
+			6 & RLLLL & 3.9976\\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+	
+	{\bf b. } Now, table 1 also shows that period-4 orbit with pattern RLL has a value $r=3.9603$ which is larger than RLR always occurs after RLR with $r=3.4986.$\\
+	
+	
+	\noindent
+	{\bf 10.7.4 Wildness of Universal Function }\\
+	{\bf Solution: } To verify that the function $g(x)$ has infinitely many wiggles as $x$ ranges over the real line, we show that it crosses the line $y=\pm x$ infinitely many times by showing that if $x^*$ is a fixed point of $g(x),$ then so $ax^*.$\\  
+	Now, we use the universal function
+	\begin{align*}
+	g_i(x)&=\lim_{n\to\infty} a^n f^{2^n}\left(\frac{x}{a^n}, R_{n+1}\right)\\
+	\Rightarrow f\left(x,R_{+\infty}\right)&\approx a f^2\left(\frac{x}{a}, R_{\infty}\right)\\
+	\Rightarrow g(x)&=ag^2\left(\frac{x}{a}\right).
+	\end{align*} 
+	Now, if $x^*$ is a fixed point of $g(x)$ then we have $g(x^*)=ag^2\left(\frac{x^*}{a}\right).$ Since $a$ is an arbitrary constant then it holds for any value of $a.$ Therefore, if $x^*$ is a fixed point, so is $ax^*.$ That is,$g(x^*)=ag^2\left(\frac{ax^*}{a}\right)\Rightarrow g(x^*)=ag^2\left(x^*\right)$. \mycbox{black}
+	
+	
+\end{document}             % End of document.

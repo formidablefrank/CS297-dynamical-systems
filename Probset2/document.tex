@@ -1,0 +1,237 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol, graphicx}
+\graphicspath{ {Images/} }
+\pagestyle{empty}
+\usepackage{amsfonts,amsmath}
+\usepackage{tikz}
+\newcommand{\mycbox}[1]{\tikz{\path[draw=#1,fill=#1] (0,0) rectangle (.2cm,.2cm);}}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newtheorem{theorem}{THEOREM}
+\newtheorem{proof}{PROOF}
+
+
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\addtolength{\oddsidemargin}{-.875in}
+\addtolength{\evensidemargin}{-.875in}
+\addtolength{\textwidth}{1.75in}
+\addtolength{\topmargin}{-.875in}
+\addtolength{\textheight}{1.75in}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\def\Rl{\mathbb{R}}
+
+
+\begin{document}
+
+\centerline{{\sc Problem Set No. 3(Last Problem Set)}}
+\bigskip
+\centerline{CS 297 - Dynamical System}
+\centerline{by: Belle, Joshua and Racquel}
+
+%\begin{theorem}
+%Trial theorem package
+%\end{theorem}
+\bigskip\noindent
+{\bf EXERCISES FOR CHAPTER 7 }\\
+{\bf 7.1.8 A Circular Limit Cycle} \\
+%In the next three exercises, interpret $ \dot{x}=sinx $ as a flow on the line.\\
+{\bf Solution:} Given $\sin(x^{*}) = 0$ this implies $x^{*} = n\pi$ for $\forall n\in \mathbb{Z}$\\
+{\bf 7.2.10 Liapunov Function} \\
+%\dfrac{(4n+1)\pi}{2}~~,~~n\in Z$ \\
+{\bf 7.2.13 Dulac and Competition Model}\\
+{\bf Solution:} \\
+Let 
+\begin{align*}
+g &=\frac{1}{N_1 N_2},~~~ N=(N_1, N_2)~\text{such that}~\\ \dot{N_1} &=r_1 N_1(1-\frac{N_1}{K_1})-b_1N_1N_2,\\
+\dot{N_2} &=r_2 N_2(1-\frac{N_2}{K_2})-b_2N_1N_2\\
+\nabla \cdot \left(g \dot{N}\right)&=\frac{\partial}{\partial N_1}\left(g \cdot \dot{N_1}\right)+\frac{\partial}{\partial N_2}\left(g \cdot \dot{N_2}\right)\\
+&=\frac{\partial}{\partial N_1}\left(\frac{r_1}{N_2}\left(1-\frac{N_1}{K_1}-b_1\right)\right)+\frac{\partial}{\partial N_2}\left(\frac{r_2}{N_1}\left(1-\frac{N_2}{K_2}-b_2\right)\right)\\
+&=-\frac{r_1}{K_1 N_2}-\frac{r_2}{K_2 N_1}\\
+\end{align*}
+Since $r_1,r_2, K_1,K_2$ are all positive parameters, $N_1, N_2 >0.$\\
+$\therefore \nabla \cdot \left(g \dot{N} \right)<0.$\\
+Now, by Dulac's criterion implies that there are no closed orbits in the first quadrant. \mycbox{black}\\
+{\bf 7.3.4 Poincare-Bendixon}\\
+{\bf Solution:}\\
+\indent
+{\bf a. } 
+
+\bigskip\noindent
+{\bf 7.4.2 Lienard System} \\
+{\bf Solution:} \\
+{\bf 7.5.6 Biased Van der Pol} \\
+{\bf Solution:}\\
+\indent
+{\bf a. } To classify all the fixed points, we first write out our system in Lienard form. First we define $F(x)$ so that
+\begin{align*}
+\ddot{x}+\mu(x^2-1)\dot{x}=\frac{d}{dx}\left(\dot{x}+\mu F(x)\right),
+\end{align*}
+which works out if $F(x)=\frac{x^3}{3}-x,$  just as it did in the non-biased case. Then everything works out the same as it did in the non biased case, only that in our case , working through everything through as is the afore mentioned example, we find that $\dot{y}=-\frac{(x-a)}{\mu}.$ Thus, our system becomes
+\begin{align*}
+\dot{x} &=\mu[y-F(x)]\\
+\dot{y} &=-\frac{x-a}{\mu}
+\end{align*}
+Consequently, our $x-$ nullcline becomes $y=F(x)$ and our $y-$ nullcline becomes $x=a.$ Ths our intersection and only fixed point is at $x^*=\left(a,F(a)\right)=\left(a,a^3/3-a\right).$ Next, we compute the Jacobian matrix and evaluate at $X^*.$\\
+(Insert graph please for the nullcline)\\
+Now,\\
+\begin{align*}
+J&=\left(\begin{array}{cc} -\mu (x^2-1) & \mu \\
+-\frac{1}{\mu} & 0
+\end{array}\right).
+\end{align*}
+From this we find that our trace and determinant are going to be given by $T==\mu(a^2-1)$ and $D=1.$ Since our determinant is always positive we are never going to have any sort of saddlish behaviour. Furthermore, we have that the system is unstable when $-1< a <1$ and unstable otherwise. Furthermore, for sufficiently high values of $a$ the value of $T^2-4D=\mu^2(a^2-1)^2-4$ will be positive, implying that the fixed point will be a node. Clearly, this can't always be the case, since plugging in $a=1$ readily checks out as giving us negative value for $T^2-4D,$ implying that we do have spiral behaviour for certain values of $a.$\\
+\indent
+{\bf b. } See figure below for a numerically produced plot given that $a=0.4$ and $\mu=5,$ which has been laid on top of a vector field of that system. Now, to see that the fixed point in cases like these are unstable, we resort to the work we did for part $(a)$ with respect to finding stabilities of fixed points for various regions.\\
+\indent
+{\bf c. } For $|a|<a_c=1,$ the $y-$ nullcline intersects the $x-$ nullcline on the middle branch of the cubic nullcline. We know that when this is the case the intersection, the fixed point, is unstable, so all initial conditions move away from that point. Furthermore, they all move toward the cubic nullcline, and once there, they will move up along the nullcline if it has reached the negative leg, and will move down if on the positive leg. Eventually, the trajectory will reach either a local maximum or local minimum depending on which leg you are on.\\
+(Please insert the nullcline plot)\\
+Now, if $|a|>a_c,$ there can be no stable limit cycle, since the $x$ nullcline intersects the cubic nullcline along one of the positive branches, and consequently, once a trajectory hits that nullcline, it will move slowly along it and toward the intersection since if it hits below the intersection, then $x<a$ so $\dot{x}$ is positive and similarly negative if $x>a.$ Thus, since all all trajectories end up moving slowly along nullclines and toward the fixed point, there can be no stable limit cycles.\\
+\indent
+{\bf d. } (Please insert the phase portrait.)\\
+Notice that if $a=1.1$, all of the trajectories end up getting stuck near the local minimum of the cubic nullcline. Now, if a slight disturbance moves the state of the system to just below the fixed point then it will shoot across to the negative leg of the cubic, and then go along the whole of the cycle but get stuck again at the globally attracting rest state.\\
+
+\pagebreak
+
+\noindent
+{\bf 7.6.14 Computer Test of Two-Timing}\\
+
+\noindent
+{\bf 8.1.10 Budworms in Forest}\\
+{\bf Solution:}\\
+
+\bigskip\noindent
+{\bf 8.2.10 Bacterial Respiration} \\
+{\bf Solution:} \\
+{\bf a. }\\
+{\bf 8.3.2 Chemical Oscillator}\\
+{\bf Solution:}\\
+
+\bigskip\noindent
+{\bf 8.4.9 Resonance and Cusp Catastrophy} \\
+{\bf Solution:} \\
+
+{\bf 8.5.3 Logistic with Periodically varying carrying capacity }\\
+{\bf Solution: }\\
+
+\noindent
+{\bf 8.6.7 Mechanical Example of Quasi-periodicity}
+{\bf Solution:}\\
+
+\noindent
+{\bf 8.7.3 Overdamped System with square-wave forcing } 
+{\bf Solution} \\
+
+{\bf 9.1.4 Laser Models}\\
+{\bf Solution: } \\
+{\bf 9.2.6 Geometric Reversals} ( The leaky bucket)\\
+{\bf Solution:}\\
+\indent
+{\bf a. } \\
+
+\bigskip\noindent
+{\bf 9.3.10 Time Horizon} \\
+{\bf Solution:} \\
+
+{\bf 9.4.2 Tent Map}\\
+{\bf Solution:}\\
+ 
+{\bf 9.5.4 Hysteresis} $\dot{x}=3$\\
+{\bf Solution: }\\
+
+\pagebreak
+\noindent
+{\bf 9.6.3 Synchronized Chaos}\\
+{\bf Solution: }\\
+
+\noindent
+{\bf 10.1.12 Newton's Method} 
+{\bf Solution:}\\
+\indent
+
+\bigskip\noindent
+{\bf 10.2.4 Standard Route to Chaos}\\
+{\bf Solution:} \\
+\noindent
+{\bf 10.3.7 Decimal Shift Map}\\
+{\bf Solution: }\\
+
+{\bf a. } . (Please insert the graph. Set 4. HW7 )\\
+The Decimal Shift Map on
+\begin{align*}
+x_{n+1}=10x_n(mod1)
+\end{align*} 
+
+{\bf b. } We see that all fixed points $\in [0,1]$ since for $x_n \in [o,1], x_n=0.1 p_n+0.01q_n+0.001r_n+...$ where $p_n,q_n,r_n$ are all integers then \\
+\begin{align*}
+x_{n+1}&=[0.1 p_n+0.01q_n+0.001r_n+...]mod1\\
+&=0.1 q_n+0.01r_n+...\\
+\end{align*} 
+$\Rightarrow$ if we want $x_{n+1}=x_n$ then \\
+\begin{align*}
+p_n &=q_n\\            
+q_n &=r_n \\
+&\vdots\\
+\Rightarrow & 0.111111...\\
+& 0.22222...\\
+& 0.3333...\\
+& 0.4444....\\
+& \vdots \\
+& 0.99999...
+\end{align*}
+which are all fixed points.\\
+{\bf c. } The periodic points are \\
+\begin{align*}
+x_0&=0.123123123...\\
+x_1&=0.231231231...\\
+x_2&=0.312312312...\\
+x_3&=0.123123...=x_0\\
+\end{align*} 
+This implies that all rational numbers are either fixed points or cycles.\\
+Now, let's construct cycles of any length this way. To prove the stability of the cycle we calculate ${\pi_{x_i \in cycle}}_{\left(p numbers\right)} |f'(x_i)|= {\pi_{x_i \in cycle}}_{\left(p numbers\right)} 10 =10^p >1. \Rightarrow$ the cycles are all unstable.\\
+{\bf d. } To prove the map is chaotic, note that 
+\begin{align*}
+\lambda=\lim_{n\to\infty} \frac{1}{n} \sum_{x_i \in orbit x_0 to x_n} ln |f'(x_i)|=ln 10 
+\end{align*}
+$\Rightarrow$ the map is chaotic; $\forall x_0$ which is not a fixed point nor on the unstable cycle, i.e., all irrational numbers in [0,1].\\
+\noindent
+{\bf 10.4.9 Period Doubling in Lorenz} 
+{\bf Solution:}\\
+\indent
+{\bf a. } \\
+
+{\bf 10.5.2 Lyapunov for decimal shift } \\
+{\bf Solution: }\\
+
+\bigskip\noindent
+{\bf 10.6.4 Period 4}\\
+\bigskip
+
+{\bf Solution:}\\
+
+\noindent
+{\bf 10.7.4 Wildness of Universal Function }\\
+{\bf Solution: }
+
+\end{document}             % End of document.
